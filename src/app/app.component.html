@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a class="navbar-brand" routerLink="/calendrier-general"><img src="assets/img/logo.png"></a>
+
+	<button class="navbar-toggler" type="button" data-toggle="collapse" 
+			data-target="#contenu" aria-controls="contenu" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	</button>
+	
+	<div class="collapse navbar-collapse" id="contenu">
+		<ul class="navbar-nav">
+			<li class="nav-item"><a class="nav-link" routerLink="/ressource">Ressources</a>
+			</li>
+			<li class="nav-item"><a class="nav-link"
+				routerLink="/add-ressource">Ajouter ressource</a></li>
+				
+			<li class="nav-item"><a class="nav-link" routerLink="/service">Services</a>
+			</li>
+			<li class="nav-item"><a class="nav-link"
+				routerLink="/add-service">Ajouter service</a></li>
+		</ul>
+	</div>
+</nav>
+<div class="root">
+	<router-outlet></router-outlet>
+</div>
+
+
+

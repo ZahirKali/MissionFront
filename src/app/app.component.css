@@ -1,0 +1,7 @@
+.fixed-top {
+	position: relative; /* aligner le calandrier a la suite de la navbar */
+}
+
+.root {
+	margin: 3%;
+}

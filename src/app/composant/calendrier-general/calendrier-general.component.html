@@ -1,0 +1,188 @@
+<!-- Modale d'explication evennement -->
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <h5 class="modal-title">Event action occurred</h5>
+    <button type="button" class="close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      Action:
+      <pre>{{ modalData?.action }}</pre>
+    </div>
+    <div>
+      Event:
+      <pre>{{ modalData?.event | json }}</pre>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary">OK</button>
+  </div>
+</ng-template>
+
+
+<!-- Entete : Debut -->
+<div class="row text-center">
+	<!--  Précédent, actuel et suivant -->
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div
+        class="btn btn-primary"
+        mwlCalendarPreviousView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="activeDayIsOpen = false">
+        Precedent
+      </div>
+      <div
+        class="btn btn-outline-secondary"
+        mwlCalendarToday
+        [(viewDate)]="viewDate">
+        Actuel
+      </div>
+      <div
+        class="btn btn-primary"
+        mwlCalendarNextView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="activeDayIsOpen = false">
+        Suivant
+      </div>
+    </div>
+  </div>
+  
+  <!-- Date -->
+  <div class="col-md-4">
+    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+  </div>
+  
+  <!-- Mois, Semaine, Jour -->
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div
+        class="btn btn-primary"
+        (click)="view = 'month'"
+        [class.active]="view === 'month'">
+        Mois
+      </div>
+      <div
+        class="btn btn-primary"
+        (click)="view = 'week'"
+        [class.active]="view === 'week'">
+        Semaine
+      </div>
+      <div
+        class="btn btn-primary"
+        (click)="view = 'day'"
+        [class.active]="view === 'day'">
+        Jour
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Entete : Fin -->
+
+<br>
+
+<!-- Gestion changement vue  -->
+<div [ngSwitch]="view">
+  <mwl-calendar-month-view
+    *ngSwitchCase="'month'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [activeDayIsOpen]="activeDayIsOpen"
+    (dayClicked)="dayClicked($event.day)"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)">
+  </mwl-calendar-month-view>
+  <mwl-calendar-week-view
+    *ngSwitchCase="'week'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)">
+  </mwl-calendar-week-view>
+  <mwl-calendar-day-view
+    *ngSwitchCase="'day'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)">
+  </mwl-calendar-day-view>
+</div>
+
+<br><br><br>
+
+<!-- Creation evennement -->
+<h3>
+  Missions ...
+  <button
+    class="btn btn-primary pull-right" (click)="addMission()">
+    Nouvelle mission
+  </button>
+  <div class="clearfix"></div>
+</h3>
+
+<table class="table table-bordered">
+
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Couleur premiere</th>
+      <th>Couleur secondaire</th>
+      <th>Debut</th>
+      <th>Fin</th>
+      <th>Supprimer</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let event of events | missionCouranteFilter:missionCourante, let index = index">
+      <td>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="event.title"
+          (keyup)="refresh.next()">
+      </td>
+      <td>
+        <input
+          type="color"
+          [(ngModel)]="event.color.primary"
+          (change)="refresh.next()">
+      </td>
+      <td>
+        <input
+          type="color"
+          [(ngModel)]="event.color.secondary"
+          (change)="refresh.next()">
+      </td>
+      <td>
+        <mwl-demo-utils-date-time-picker
+          [(ngModel)]="event.start"
+          (ngModelChange)="refresh.next()"
+          placeholder="Not set">
+        </mwl-demo-utils-date-time-picker>
+      </td>
+      <td>
+        <mwl-demo-utils-date-time-picker
+          [(ngModel)]="event.end"
+          (ngModelChange)="refresh.next()"
+          placeholder="Not set">
+        </mwl-demo-utils-date-time-picker>
+      </td>
+      <td>
+        <button
+          class="btn btn-danger"
+          (click)="events.splice(index, 1); refresh.next()">
+          Supprimer
+        </button>
+      </td>
+    </tr>
+  </tbody>
+
+</table>

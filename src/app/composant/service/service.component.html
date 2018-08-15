@@ -1,0 +1,22 @@
+<div class="col-md-6">
+	<h2 class="text-center">Tous les services</h2>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Code</th>
+				<th>Libelle</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let service of services">
+				<td>{{service.code}}</td>
+				<td>{{service.libelle}}</td>
+				<td><button class="btn btn-danger" (click)="deleteService(service)">
+							Supprimer
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
