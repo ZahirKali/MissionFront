@@ -1,24 +1,75 @@
-<div class="col-md-6">
-	<h2 class="text-center">Toutes les ressources</h2>
+<div class="container">
+	<!-- Ajouter une ressource-->
+	<div class="card">
+		<div class="card-header" id="headingOne">
+	      <h5 class="mb-0 text-center">
+	        <button class="btn btn-link" data-toggle="collapse" data-target="#ajouterRessource">
+	          Ajouter une ressource
+	        </button>
+	      </h5>
+	    </div>
+	
+	    <div id="ajouterRessource" class="collapse">
+	      <div class="card-body row justify-content-center">
+			<div class="col-lg-7 col-md-7">
+				<form>
+					<div class="input-group mb-3">
+				      <div class="input-group-prepend">
+				        <span class="input-group-text" id="code"><i class="fa fa-id-badge"></i></span>
+				      </div>
+				      <input [(ngModel)]="ressource.code" type="text" class="form-control" placeholder="Code" aria-describedby="code">
+				    </div>
+			
+					<div class="input-group mb-3">
+				      <div class="input-group-prepend">
+				        <span class="input-group-text" id="nom"><i class="fa fa-user"></i></span>
+				      </div>
+				      <input [(ngModel)]="ressource.nom" type="text" class="form-control" placeholder="Nom" aria-describedby="nom">
+				    </div>
 
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Code</th>
-				<th>Nom</th>
-				<th>Prenom</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr *ngFor="let ressource of ressources">
-				<td>{{ressource.code}}</td>
-				<td>{{ressource.nom}}</td>
-				<td>{{ressource.prenom}}</td>
-				<td><button class="btn btn-danger" (click)="deleteRessource(ressource)">
-							Supprimer
-					</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+					<div class="input-group mb-3">
+				      <div class="input-group-prepend">
+				        <span class="input-group-text" id="prenom"><i class="fa fa-user"></i></span>
+				      </div>
+				      <input [(ngModel)]="ressource.prenom" type="text" class="form-control" placeholder="Prenom" aria-describedby="prenom">
+				    </div>
+					
+					<div class="row justify-content-center">
+						<button class="btn btn-success" (click)="createRessource()">Ajouter</button>				
+					</div>
+				</form>
+			</div>
+	      </div>
+	    </div>
+	</div>
+
+	<!-- Liste des ressources -->
+	<div class="card">
+		<div class="card-header" id="headingOne">
+	      <h3 class="text-center">Liste des ressources</h3>
+	      <div class="card-body">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Code</th>
+						<th>Nom</th>
+						<th>Prenom</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let ressource of ressources">
+						<td>{{ressource.code}}</td>
+						<td>{{ressource.nom}}</td>
+						<td>{{ressource.prenom}}</td>
+						<td><button class="btn btn-danger" (click)="deleteRessource(ressource)">
+									Supprimer
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+	      </div>
+	    </div>
+	</div>
+	
 </div>

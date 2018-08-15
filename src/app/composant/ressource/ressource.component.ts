@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class RessourceComponent implements OnInit {
 
+  ressource: Ressource = new Ressource();
+
   ressources: Ressource[];
 
    constructor(private router: Router, private ressourceService: RessourceService) {}
@@ -27,6 +29,14 @@ export class RessourceComponent implements OnInit {
     this.ressourceService.deleteRessource(res)
       .subscribe( data => {
         this.ressources = this.ressources.filter(r => r !== res);
+      });
+  }
+  
+    createRessource(): void {
+    this.ressourceService
+      .createRessource(this.ressource)
+      .subscribe(data => {
+        alert('Ressource créée!');
       });
   }
 }

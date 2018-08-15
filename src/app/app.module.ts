@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { AddRessourceComponent } from './composant/ressource/add-ressource.component';
 import { RessourceComponent } from './composant/ressource/ressource.component';
 import { AppRoutingModule } from './app.routing.module';
 import { CalendrierGeneralComponent } from './composant/calendrier-general/calendrier-general.component';
@@ -23,7 +22,6 @@ import { CalendarModule } from 'angular-calendar';
   declarations: [
     AppComponent,
     RessourceComponent,
-    AddRessourceComponent,
     ServiceComponent,
     AddServiceComponent,
     CalendrierGeneralComponent,
